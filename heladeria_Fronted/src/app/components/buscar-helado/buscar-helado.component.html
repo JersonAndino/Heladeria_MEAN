@@ -1,0 +1,13 @@
+<div style="display:flex; flex-wrap:wrap; width:95%;" class="m-auto">
+    <div *ngFor="let helado of helados"  class="helado-box" style="width:250px">
+        <a [routerLink]="['/helados',helado._id]">
+            <div>
+                <h1>Nombre: {{helado.tipo}}</h1>
+                <h3>Tamanio: {{helado.sabor}}</h3>
+                <h3>Porciones: {{helado.descripcion}}</h3>
+                <h3>Precio: {{helado.precio}}</h3>
+                <img src="{{url+'get-imagen/'+helado.imagen}}" *ngIf="helado.imagen" width="100px">
+            </div>
+        </a>
+    </div>
+</div>

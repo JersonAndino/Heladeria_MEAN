@@ -1,0 +1,37 @@
+<div>
+    <form #heladoForm="ngForm" (ngSubmit)="guardarHelado(heladoForm)">
+        <div>
+            <span>Tipo: </span>
+            <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="helado.tipo">
+        </div>
+        <div>
+            <span>Sabor: </span>
+            <select name="sabor" #sabor="ngModel" [(ngModel)]="helado.sabor">
+                <option value="Mora" selected>Mora</option>
+                <option value="Chocolate">Chocolate</option>
+                <option value="Vainilla">Vainilla</option>
+                <option value="Fresa">Fresa</option>
+                <option value="Limon">Limon</option>
+                <option value="3 Leches">3 Leches</option>
+            </select>
+        </div>
+        <div>
+            <span>Descripcion: </span>
+            <textarea name="tamanio" #tamanio="ngModel" [(ngModel)]="helado.descripcion" cols="30" rows="10"></textarea>
+        </div>
+        <div>
+            <span>Precio: </span>
+            <input type="number" name="precio" #precio="ngModel" [(ngModel)]="helado.precio">
+        </div>
+        <div>
+            <span>Imagen: </span>
+            <span *ngIf="helado.imagen" style="float:none;">
+                <img src="{{url+'get-imagen/'+helado.imagen}}" style="width:100px;" alt="">
+            </span>
+            <input type="file" #archivoImagen placeholder="Seleccionar imagen" (change)="imagenChangeEvent($event);">            
+        </div>
+        <div>
+            <input type="submit" [disabled]="!heladoForm.form.valid" value="GUARDAR">
+        </div>
+    </form>
+</div>

@@ -1,0 +1,55 @@
+
+<div style="display:flex; flex-wrap:wrap">
+    <div style="width:50%; display:flex; flex-wrap:wrap;">
+        <div *ngFor="let helado of helados"  class="helado-box" style="width:300px;">
+            <a [routerLink]="['/helados',helado._id]">
+                <div>
+                    <h1>Nombre: {{helado.tipo}}</h1>
+                    <h3>Tamanio: {{helado.sabor}}</h3>
+                    <h3>Porciones: {{helado.descripcion}}</h3>
+                    <h3>Precio: {{helado.precio}}</h3>
+                    <img src="{{url+'get-imagen/'+helado.imagen}}" *ngIf="helado.imagen" style="width:50px;">
+                </div>
+            </a>
+        </div>
+    </div>
+    <div style="width:50%">
+        <form #heladoForm="ngForm" (ngSubmit)="actualizarHeladoPorId(heladoForm)">
+            <div>
+                <span>Tipo: </span>
+                <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="helado.tipo">
+            </div>
+            <div>
+                <span>Sabor: </span>
+                <select name="sabor" #sabor="ngModel" [(ngModel)]="helado.sabor">
+                    <option value="Mora" selected>Mora</option>
+                    <option value="Chocolate">Chocolate</option>
+                    <option value="Vainilla">Vainilla</option>
+                    <option value="Fresa">Fresa</option>
+                    <option value="Limon">Limon</option>
+                    <option value="3 Leches">3 Leches</option>
+                </select>
+            </div>
+            <div>
+                <span>Descripcion: </span>
+                <textarea name="tamanio" #tamanio="ngModel" [(ngModel)]="helado.descripcion" cols="30" rows="10"></textarea>
+            </div>
+            <div>
+                <span>Precio: </span>
+                <input type="number" name="precio" #precio="ngModel" [(ngModel)]="helado.precio">
+            </div>
+            <div>
+                <span>Imagen: </span>
+                <span *ngIf="helado.imagen" style="float:none;">
+                    <img src="{{url+'get-imagen/'+helado.imagen}}" style="width:50px;" alt="">
+                </span>
+                <input type="file" #archivoImagen placeholder="Seleccionar imagen" (change)="imagenChangeEvent($event);">            
+            </div>
+            <div>
+                <input type="submit" [disabled]="!heladoForm.form.valid" value="GUARDAR">
+            </div>
+        </form>
+        <button class="btn btn-primary" (click)="eliminarHeladoPorId()">ELIMINAR</button>
+    </div>
+    
+</div>
